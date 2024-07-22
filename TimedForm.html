@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Timed Test Form</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  #timer { font-size: 24px; color: red; }
+</style>
+<script>
+window.onload = function () {
+  var timeLeft = 10 * 60; // 10 minutes in seconds
+  var timerElement = document.getElementById('timer');
+  var interval = setInterval(function() {
+    var minutes = parseInt(timeLeft / 60, 10);
+    var seconds = parseInt(timeLeft % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timerElement.textContent = minutes + ":" + seconds;
+
+    if (--timeLeft < 0) {
+      clearInterval(interval);
+      alert('Time is up! Your form will be submitted.');
+      document.getElementById('googleForm').submit(); // Submit the form
+    }
+  }, 1000);
+};
+</script>
+</head>
+<body>
+<div id="timer">10:00</div>
+<iframe id="googleForm" src="https://docs.google.com/forms/d/e/1FAIpQLSe3lUruCUa-drejGTvrtuxT-Vglw9ojOHJ8oDYBRWiwDBylRQ/viewform" style="width:100%; height:500px; border:none;"></iframe>
+</body>
+</html>
